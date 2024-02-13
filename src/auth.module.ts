@@ -4,11 +4,9 @@ import { AuthService } from './auth.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from './db/data-source';
-import { UserMapper } from './db/mappers/user.mapper';
-import { UserRepository } from './db/repositories/user.repository';
 import { JwtService } from './jwt.service';
-import { AppRepository } from './db/repositories/app.repository';
-import { AppMapper } from './db/mappers/app.mapper';
+import { UserModule } from './modules/user/user.module';
+import { AppModule } from './modules/app/app.module';
 
 @Module({
   imports: [
@@ -20,15 +18,10 @@ import { AppMapper } from './db/mappers/app.mapper';
       entities: ['dist/**/*.entity{.ts,.js}'],
       migrations: ['dist/migrations/*{.ts,.js}'],
     }),
+    UserModule,
+    AppModule,
   ],
   controllers: [AuthController],
-  providers: [
-    AuthService,
-    UserMapper,
-    UserRepository,
-    JwtService,
-    AppRepository,
-    AppMapper,
-  ],
+  providers: [AuthService, JwtService],
 })
 export class AuthModule {}

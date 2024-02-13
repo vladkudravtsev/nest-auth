@@ -22,7 +22,11 @@ export class AuthController {
 
   @GrpcMethod('Auth', 'Login')
   async login(data: LoginRequest.AsObject): Promise<LoginResponse.AsObject> {
-    const token = await this.authService.login(data.identity, data.password);
+    const token = await this.authService.login(
+      data.identity,
+      data.password,
+      data.appId,
+    );
 
     return {
       token,

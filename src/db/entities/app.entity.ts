@@ -7,4 +7,7 @@ export class AppEntity {
 
   @Column({ unique: true })
   name: string;
+
+  @Column()
+  secret: string;
 }

@@ -4,7 +4,7 @@ package auth;
 
 message LoginRequest {
   uint32 app_id = 1;
-  string email = 2;
+  string identity = 2;
   string password = 3;
 }
 
@@ -13,9 +13,8 @@ message LoginResponse {
 }
 
 message RegisterRequest {
-  string name = 1;
-  string email = 2;
-  string password = 3;
+  string identity = 1;
+  string password = 2;
 }
 
 message RegisterResponse {

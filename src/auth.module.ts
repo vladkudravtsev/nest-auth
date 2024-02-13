@@ -4,6 +4,8 @@ import { AuthService } from './auth.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from './db/data-source';
+import { UserMapper } from './db/mappers/user.mapper';
+import { UserRepository } from './db/repositories/user.repository';
 
 @Module({
   imports: [
@@ -17,6 +19,6 @@ import { dataSourceOptions } from './db/data-source';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, UserMapper, UserRepository],
 })
 export class AuthModule {}

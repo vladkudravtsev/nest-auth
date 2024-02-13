@@ -9,8 +9,8 @@ import * as jspb from "google-protobuf";
 export class LoginRequest extends jspb.Message { 
     getAppId(): number;
     setAppId(value: number): LoginRequest;
-    getEmail(): string;
-    setEmail(value: string): LoginRequest;
+    getIdentity(): string;
+    setIdentity(value: string): LoginRequest;
     getPassword(): string;
     setPassword(value: string): LoginRequest;
 
@@ -27,7 +27,7 @@ export class LoginRequest extends jspb.Message {
 export namespace LoginRequest {
     export type AsObject = {
         appId: number,
-        email: string,
+        identity: string,
         password: string,
     }
 }
@@ -53,10 +53,8 @@ export namespace LoginResponse {
 }
 
 export class RegisterRequest extends jspb.Message { 
-    getName(): string;
-    setName(value: string): RegisterRequest;
-    getEmail(): string;
-    setEmail(value: string): RegisterRequest;
+    getIdentity(): string;
+    setIdentity(value: string): RegisterRequest;
     getPassword(): string;
     setPassword(value: string): RegisterRequest;
 
@@ -72,8 +70,7 @@ export class RegisterRequest extends jspb.Message {
 
 export namespace RegisterRequest {
     export type AsObject = {
-        name: string,
-        email: string,
+        identity: string,
         password: string,
     }
 }

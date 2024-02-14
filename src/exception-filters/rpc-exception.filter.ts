@@ -17,7 +17,7 @@ const rpcCodeMapping = new Map([
 ]);
 
 @Catch(DomainException)
-export class DomainRpcExceptionFilter implements ExceptionFilter {
+export class RpcDomainExceptionFilter implements ExceptionFilter {
   catch(exception: DomainException): Observable<any> {
     const code = rpcCodeMapping.get(exception.constructor.name);
 

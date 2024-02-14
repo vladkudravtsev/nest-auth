@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, UseFilters } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { GrpcMethod } from '@nestjs/microservices';
 import {
@@ -7,8 +7,10 @@ import {
   RegisterRequest,
   RegisterResponse,
 } from './api/proto/auth_pb';
+import { DomainRpcExceptionFilter } from './exception-filters/rpc-exception.filter';
 
 @Controller()
+@UseFilters(DomainRpcExceptionFilter)
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

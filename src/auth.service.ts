@@ -3,6 +3,11 @@ import { UserRepository } from './modules/user/user.repository';
 import { hash, compare } from 'bcrypt';
 import { JwtService } from './jwt.service';
 import { AppRepository } from './modules/app/app.repository';
+import {
+  AppNotFoundException,
+  InvalidCredentialsException,
+  UserNotFoundException,
+} from './domain/exceptions/auth.exception';
 
 @Injectable()
 export class AuthService {
@@ -21,22 +26,17 @@ export class AuthService {
     const user = await this.userRepository.findOne(identity);
 
     if (!user) {
-      // TODO: throw domain exception
-      throw new Error('User not found');
+      throw new UserNotFoundException(identity);
     }
 
     const isLoggedIn = await compare(password, user.passwordHash);
-
     if (!isLoggedIn) {
-      // TODO: throw domain exception
-      throw new Error('wrong password');
+      throw new InvalidCredentialsException();
     }
 
     const app = await this.appRepository.findById(appId);
-
     if (!app) {
-      // TODO: throw domain exception
-      throw new Error('app not found');
+      throw new AppNotFoundException(appId);
     }
 
     const token = this.jwtService.issueToken(

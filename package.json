@@ -22,7 +22,10 @@
     "migration:run": "npm run typeorm migration:run -- -d ./src/db/data-source.ts",
     "migration:generate": "npm run typeorm -- -d ./src/db/data-source.ts migration:generate -p",
     "migration:create": "npm run typeorm -- migration:create",
-    "migration:revert": "npm run typeorm -- -d ./src/db/data-source.ts migration:revert"
+    "migration:revert": "npm run typeorm -- -d ./src/db/data-source.ts migration:revert",
+    "proto:js": "npx grpc_tools_node_protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --js_out=import_style=commonjs,binary:./src/api/proto -I ./node_modules/nest-proto node_modules/nest-proto/auth.proto",
+    "proto:ts": "npx grpc_tools_node_protoc --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts --ts_out=./src/api/proto -I ./node_modules/nest-proto node_modules/nest-proto/auth.proto",
+    "proto:auth": "npm run proto:js && npm run proto:ts"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.10.0",
@@ -39,6 +42,7 @@
     "grpc_tools_node_protoc_ts": "^5.3.3",
     "grpc-tools": "^1.12.4",
     "jsonwebtoken": "^9.0.2",
+    "nest-proto": "github:vladkudravtsev/nest-proto",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",

@@ -29,7 +29,6 @@ export class AuthService {
 
   public async login(identity: string, password: string, appId: number) {
     const user = await this.userRepository.findOne(identity);
-
     if (!user) {
       throw new UserNotFoundException(identity);
     }
@@ -44,14 +43,12 @@ export class AuthService {
       throw new AppNotFoundException(appId);
     }
 
-    const token = this.jwtService.issueToken(
-      {
-        appId: appId.toString(),
-        subject: identity,
-        audience: app.name,
-      },
-      app.secret,
-    );
+    const tokenPayload = {
+      appId: appId.toString(),
+      subject: identity,
+      audience: app.name,
+    };
+    const token = this.jwtService.issueToken(tokenPayload, app.secret);
 
     return token;
   }

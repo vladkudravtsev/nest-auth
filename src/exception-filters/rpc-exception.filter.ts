@@ -9,17 +9,17 @@ import {
 } from 'src/domain/exceptions/auth.exception';
 import { status } from '@grpc/grpc-js';
 
-const rpcCodeMapping = {
-  [InvalidCredentialsException.name]: status.INVALID_ARGUMENT,
-  [UserNotFoundException.name]: status.NOT_FOUND,
-  [AppNotFoundException.name]: status.NOT_FOUND,
-  [UserAlreadyExistsException.name]: status.INVALID_ARGUMENT,
-};
+const rpcCodeMapping = new Map([
+  [InvalidCredentialsException.name, status.INVALID_ARGUMENT],
+  [UserNotFoundException.name, status.NOT_FOUND],
+  [AppNotFoundException.name, status.NOT_FOUND],
+  [UserAlreadyExistsException.name, status.INVALID_ARGUMENT],
+]);
 
 @Catch(DomainException)
 export class DomainRpcExceptionFilter implements ExceptionFilter {
   catch(exception: DomainException): Observable<any> {
-    const code = rpcCodeMapping[exception.constructor.name];
+    const code = rpcCodeMapping.get(exception.constructor.name);
 
     return throwError(() => ({
       code: code,

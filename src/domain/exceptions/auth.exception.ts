@@ -21,3 +21,9 @@ export class AppNotFoundException extends DomainException {
     super(`App with id: ${appId} not found`);
   }
 }
+
+export class UserAlreadyExistsException extends DomainException {
+  constructor(identity: string) {
+    super(`User with identity: ${identity} already exists`);
+  }
+}

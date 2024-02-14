@@ -4,6 +4,7 @@ import {
   AppNotFoundException,
   DomainException,
   InvalidCredentialsException,
+  UserAlreadyExistsException,
   UserNotFoundException,
 } from 'src/domain/exceptions/auth.exception';
 import { status } from '@grpc/grpc-js';
@@ -12,6 +13,7 @@ const rpcCodeMapping = {
   [InvalidCredentialsException.name]: status.INVALID_ARGUMENT,
   [UserNotFoundException.name]: status.NOT_FOUND,
   [AppNotFoundException.name]: status.NOT_FOUND,
+  [UserAlreadyExistsException.name]: status.INVALID_ARGUMENT,
 };
 
 @Catch(DomainException)

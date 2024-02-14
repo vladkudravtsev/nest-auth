@@ -6,6 +6,7 @@ import { AppRepository } from './modules/app/app.repository';
 import {
   AppNotFoundException,
   InvalidCredentialsException,
+  UserAlreadyExistsException,
   UserNotFoundException,
 } from './domain/exceptions/auth.exception';
 
@@ -18,6 +19,10 @@ export class AuthService {
   ) {}
 
   public async register(identity: string, password: string) {
+    if (await this.userRepository.exists(identity)) {
+      throw new UserAlreadyExistsException(identity);
+    }
+
     const passwordHash = await hash(password, 10);
     return this.userRepository.create(identity, passwordHash);
   }

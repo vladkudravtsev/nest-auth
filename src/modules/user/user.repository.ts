@@ -33,4 +33,8 @@ export class UserRepository {
 
     return this.mapper.toDomain(user);
   }
+
+  public async exists(identity: string): Promise<boolean> {
+    return this.repository.exists({ where: { identity } });
+  }
 }

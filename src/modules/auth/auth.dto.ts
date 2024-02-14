@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { LoginRequest, RegisterRequest } from './api/proto/auth_pb';
+import { LoginRequest, RegisterRequest } from '../../api/proto/auth_pb';
 
 export class LoginRequestDTO implements LoginRequest.AsObject {
   @IsNumber()

@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from './modules/user/user.repository';
+import { UserRepository } from '../user/user.repository';
 import { hash, compare } from 'bcrypt';
 import { JwtService } from './jwt.service';
-import { AppRepository } from './modules/app/app.repository';
+import { AppRepository } from '../application/application.repository';
 import {
   AppNotFoundException,
   InvalidCredentialsException,
   UserAlreadyExistsException,
   UserNotFoundException,
-} from './domain/exceptions/auth.exception';
+} from '../../domain/exceptions/auth.exception';
 
 @Injectable()
 export class AuthService {

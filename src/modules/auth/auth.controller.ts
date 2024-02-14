@@ -1,10 +1,10 @@
 import { Controller, UseFilters } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { GrpcMethod } from '@nestjs/microservices';
-import { LoginResponse, RegisterResponse } from './api/proto/auth_pb';
-import { RpcDomainExceptionFilter } from './exception-filters/rpc-exception.filter';
+import { LoginResponse, RegisterResponse } from '../../api/proto/auth_pb';
+import { RpcDomainExceptionFilter } from '../../exception-filters/rpc-exception.filter';
 import { LoginRequestDTO, RegisterRequestDTO } from './auth.dto';
-import { HttpToGrpcExceptionFilter } from './exception-filters/http-grpc-exception.filter';
+import { HttpToGrpcExceptionFilter } from '../../exception-filters/http-grpc-exception.filter';
 
 @Controller()
 @UseFilters(RpcDomainExceptionFilter, HttpToGrpcExceptionFilter)

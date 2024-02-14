@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from './db/data-source';
-import { JwtService } from './jwt.service';
 import { UserModule } from './modules/user/user.module';
-import { AppModule } from './modules/app/app.module';
+import { ApplicationModule } from './modules/application/application.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -19,9 +17,10 @@ import { AppModule } from './modules/app/app.module';
       migrations: ['dist/migrations/*{.ts,.js}'],
     }),
     UserModule,
-    AppModule,
+    ApplicationModule,
+    AuthModule,
   ],
-  controllers: [AuthController],
-  providers: [AuthService, JwtService],
+  controllers: [],
+  providers: [],
 })
-export class AuthModule {}
+export class AppModule {}

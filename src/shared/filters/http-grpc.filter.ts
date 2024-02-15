@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { throwError } from 'rxjs';
 import { status as grpcStatus } from '@grpc/grpc-js';
-import { HttpStatusCode } from 'src/constants/http-grpc-status';
+import { HttpStatusCode } from 'src/shared/constants/http-grpc-status';
 
 @Catch(HttpException)
 export class HttpToGrpcExceptionFilter implements ExceptionFilter {

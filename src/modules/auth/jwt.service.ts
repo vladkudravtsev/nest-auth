@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtPayload, sign, verify } from 'jsonwebtoken';
-import { jwtPayload } from '../../types/jwt-payload';
+import { jwtPayload } from '../../shared/types/jwt-payload';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()

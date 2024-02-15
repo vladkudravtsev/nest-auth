@@ -3,9 +3,9 @@ import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { HttpToGrpcExceptionFilter } from './exception-filters/http-grpc-exception.filter';
-import { RpcDomainExceptionFilter } from './exception-filters/rpc-exception.filter';
-import { HttpDomainExceptionFilter } from './exception-filters/http.filter';
+import { HttpToGrpcExceptionFilter } from './shared/filters/http-grpc.filter';
+import { RpcDomainExceptionFilter } from './shared/filters/rpc.filter';
+import { HttpDomainExceptionFilter } from './shared/filters/http.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

@@ -1,29 +1,25 @@
 import { Controller } from '@nestjs/common';
-import { AuthService } from '../auth.service';
 import { GrpcMethod } from '@nestjs/microservices';
-import { LoginResponse, RegisterResponse } from '../../../api/proto/auth_pb';
-import { LoginRequestDTO, RegisterRequestDTO } from '../auth.dto';
+import {
+  LoginRequestDTO,
+  LoginResponseDTO,
+  RegisterRequestDTO,
+  RegisterResponseDTO,
+} from '../auth.dto';
+import { AuthController } from './controller.interface';
+import { BaseAuthController } from './auth.controller';
 
 @Controller()
-export class AuthGrpcController {
-  constructor(private readonly authService: AuthService) {}
+export class AuthGrpcController implements AuthController {
+  constructor(private readonly baseController: BaseAuthController) {}
 
   @GrpcMethod('Auth', 'Register')
-  async register(data: RegisterRequestDTO): Promise<RegisterResponse.AsObject> {
-    const user = await this.authService.register(data.identity, data.password);
-    return { message: user.identity };
+  async register(data: RegisterRequestDTO): Promise<RegisterResponseDTO> {
+    return this.baseController.register(data);
   }
 
   @GrpcMethod('Auth', 'Login')
-  async login(data: LoginRequestDTO): Promise<LoginResponse.AsObject> {
-    const token = await this.authService.login(
-      data.identity,
-      data.password,
-      data.appId,
-    );
-
-    return {
-      token,
-    };
+  async login(data: LoginRequestDTO): Promise<LoginResponseDTO> {
+    return this.baseController.login(data);
   }
 }

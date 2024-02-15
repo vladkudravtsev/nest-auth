@@ -1,5 +1,10 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { LoginRequest, RegisterRequest } from '../../api/proto/auth_pb';
+import {
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
+  RegisterResponse,
+} from '../../api/proto/auth_pb';
 
 export class LoginRequestDTO implements LoginRequest.AsObject {
   @IsNumber()
@@ -22,4 +27,12 @@ export class RegisterRequestDTO implements RegisterRequest.AsObject {
   @IsString()
   @IsNotEmpty()
   password: string;
+}
+
+export class LoginResponseDTO implements LoginResponse.AsObject {
+  token: string;
+}
+
+export class RegisterResponseDTO implements RegisterResponse.AsObject {
+  message: string;
 }

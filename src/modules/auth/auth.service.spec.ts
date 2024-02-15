@@ -16,6 +16,8 @@ describe('AuthService', () => {
   let service: AuthService;
   let userRepository: UserRepository;
   let appRepository: AppRepository;
+  const mockUser = { id: 1, identity: 'identity', passwordHash: 'hash' };
+  const mockApp = { id: 1, name: 'test-app', secret: 'appSecret' };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -46,16 +48,13 @@ describe('AuthService', () => {
   });
 
   it('should register a new user with a unique identity and valid password', async () => {
-    const identity = 'identity';
-    const password = 'password';
-    const mockUser = { id: 1, identity, passwordHash: 'hash' };
-
+    const { identity } = mockUser;
     jest.spyOn(userRepository, 'exists').mockResolvedValueOnce(false);
     jest.spyOn(userRepository, 'create').mockResolvedValueOnce(mockUser);
 
-    const result = await service.register(identity, password);
+    const result = await service.register(identity, 'password');
 
-    expect(result.identity).toBe(identity);
+    expect(result).toEqual(mockUser);
   });
 
   it('should throw UserAlreadyExistsException when registering a new user with an existing identity', async () => {
@@ -66,9 +65,6 @@ describe('AuthService', () => {
   });
 
   it('should return a token for valid user login', async () => {
-    const mockUser = { id: 1, identity: 'identity', passwordHash: 'hash' };
-    const mockApp = { id: 1, name: 'test-app', secret: 'appsecret' };
-
     jest.spyOn(userRepository, 'findOne').mockResolvedValueOnce(mockUser);
     jest.spyOn(appRepository, 'findById').mockResolvedValueOnce(mockApp);
     jest
@@ -88,7 +84,6 @@ describe('AuthService', () => {
   });
 
   it('should throw InvalidCredentialsException when credentials are invalid', async () => {
-    const mockUser = { id: 1, identity: 'identity', passwordHash: 'hash' };
     jest.spyOn(userRepository, 'findOne').mockResolvedValueOnce(mockUser);
     jest
       .spyOn(bcrypt, 'compare')
@@ -100,7 +95,6 @@ describe('AuthService', () => {
   });
 
   it('should throw AppNotFoundException when app is not found', async () => {
-    const mockUser = { id: 1, identity: 'identity', passwordHash: 'hash' };
     jest.spyOn(userRepository, 'findOne').mockResolvedValueOnce(mockUser);
     jest
       .spyOn(bcrypt, 'compare')

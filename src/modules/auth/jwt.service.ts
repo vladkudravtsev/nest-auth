@@ -23,7 +23,7 @@ export class JwtService {
       (resolve, reject) => {
         const issuer = this.configService.get('JWT_ISSUER');
         verify(token, secret, { issuer }, (err, token) =>
-          err ? reject(err) : resolve(token),
+          !token || err ? reject(err) : resolve(token),
         );
       },
     );

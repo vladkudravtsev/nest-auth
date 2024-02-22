@@ -34,13 +34,18 @@ describe('JwtService', () => {
     const decoded = decode(token, { json: true });
     const delta = 1000;
     const expectedExpiration = Math.round(
-      (Date.now() + parseInt(configService.get('JWT_LIFETIME')) + delta) / 1000,
+      (Date.now() +
+        parseInt(configService.getOrThrow('JWT_LIFETIME')) +
+        delta) /
+        1000,
     );
-    expect(decoded.app_id).toBe(payload.appId);
-    expect(decoded.sub).toBe(payload.subject);
-    expect(decoded.iss).toBe(configService.get('JWT_ISSUER'));
-    expect(decoded.aud).toBe(payload.audience);
-    expect(decoded.exp).toBeLessThan(expectedExpiration);
+
+    expect(decoded).not.toBeNull();
+    expect(decoded?.app_id).toBe(payload.appId);
+    expect(decoded?.sub).toBe(payload.subject);
+    expect(decoded?.iss).toBe(configService.get('JWT_ISSUER'));
+    expect(decoded?.aud).toBe(payload.audience);
+    expect(decoded?.exp).toBeLessThan(expectedExpiration);
   });
 
   it('should validate token with valid secret', async () => {

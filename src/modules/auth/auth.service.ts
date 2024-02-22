@@ -1,34 +1,34 @@
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from '../user/user.repository';
 import { hash, compare } from 'bcrypt';
 import { JwtService } from './jwt.service';
-import { AppRepository } from '../application/application.repository';
 import {
   AppNotFoundException,
   InvalidCredentialsException,
   UserAlreadyExistsException,
   UserNotFoundException,
 } from '../../domain/exceptions/auth.exception';
+import { UserService } from '../user/user.service';
+import { ApplicationService } from '../application/application.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly userRepository: UserRepository,
-    private readonly appRepository: AppRepository,
+    private readonly userService: UserService,
+    private readonly appService: ApplicationService,
     private readonly jwtService: JwtService,
   ) {}
 
   public async register(identity: string, password: string) {
-    if (await this.userRepository.exists(identity)) {
+    if (await this.userService.exists(identity)) {
       throw new UserAlreadyExistsException(identity);
     }
 
     const passwordHash = await hash(password, 10);
-    return this.userRepository.create(identity, passwordHash);
+    return this.userService.create(identity, passwordHash);
   }
 
   public async login(identity: string, password: string, appId: number) {
-    const user = await this.userRepository.findOne(identity);
+    const user = await this.userService.findOne(identity);
     if (!user) {
       throw new UserNotFoundException(identity);
     }
@@ -38,7 +38,7 @@ export class AuthService {
       throw new InvalidCredentialsException();
     }
 
-    const app = await this.appRepository.findById(appId);
+    const app = await this.appService.findById(appId);
     if (!app) {
       throw new AppNotFoundException(appId);
     }

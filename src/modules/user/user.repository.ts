@@ -3,9 +3,10 @@ import { UserEntity } from './user.entity';
 import { User } from 'src/domain/user';
 import { DataSource } from 'typeorm';
 import { UserMapper } from './user.mapper';
+import { Repository } from './repository.interface';
 
 @Injectable()
-export class UserRepository {
+export class UserRepository implements Repository {
   constructor(
     private readonly dataSource: DataSource,
     private readonly mapper: UserMapper,

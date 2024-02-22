@@ -3,9 +3,10 @@ import { App } from 'src/domain/app';
 import { DataSource } from 'typeorm';
 import { AppEntity } from './application.entity';
 import { AppMapper } from './application.mapper';
+import { Repository } from './repository.interface';
 
 @Injectable()
-export class AppRepository {
+export class AppRepository implements Repository {
   constructor(
     private readonly dataSource: DataSource,
     private readonly mapper: AppMapper,

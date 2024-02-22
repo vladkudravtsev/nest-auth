@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppRepository } from './application.repository';
-import { AppMapper } from './application.mapper';
+import { ApplicationRepository } from './application.repository';
+import { ApplicationMapper } from './application.mapper';
 import { ApplicationService } from './application.service';
 import { Repository } from './repository.interface';
 
 @Module({
   providers: [
-    AppMapper,
+    ApplicationMapper,
     ApplicationService,
     {
       provide: Repository,
-      useClass: AppRepository,
+      useClass: ApplicationRepository,
     },
   ],
   exports: [ApplicationService],

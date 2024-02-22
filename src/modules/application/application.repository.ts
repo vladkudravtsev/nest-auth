@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { App } from 'src/domain/app';
 import { DataSource } from 'typeorm';
-import { AppEntity } from './application.entity';
-import { AppMapper } from './application.mapper';
+import { ApplicationEntity } from './application.entity';
+import { ApplicationMapper } from './application.mapper';
 import { Repository } from './repository.interface';
 
 @Injectable()
-export class AppRepository implements Repository {
+export class ApplicationRepository implements Repository {
   constructor(
     private readonly dataSource: DataSource,
-    private readonly mapper: AppMapper,
+    private readonly mapper: ApplicationMapper,
   ) {}
 
   private get repository() {
-    return this.dataSource.getRepository(AppEntity);
+    return this.dataSource.getRepository(ApplicationEntity);
   }
 
   public async findById(id: number): Promise<App | null> {

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { AppEntity } from './application.entity';
+import { ApplicationEntity } from './application.entity';
 import { App } from 'src/domain/app';
 
 @Injectable()
-export class AppMapper {
-  public toDomain(app: AppEntity): App {
+export class ApplicationMapper {
+  public toDomain(app: ApplicationEntity): App {
     return {
       id: app.id,
       name: app.name,

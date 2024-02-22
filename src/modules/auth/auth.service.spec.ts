@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { UserService } from '../user/user.service';
-import { JwtService } from './jwt.service';
+import { JwtService } from '../jwt/jwt.service';
 import { ConfigModule } from '@nestjs/config';
 import {
   UserAlreadyExistsException,

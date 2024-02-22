@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { hash, compare } from 'bcrypt';
-import { JwtService } from './jwt.service';
+import { JwtService } from '../jwt/jwt.service';
 import {
   AppNotFoundException,
   InvalidCredentialsException,

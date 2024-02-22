@@ -5,10 +5,13 @@ import { dataSourceOptions } from './db/data-source';
 import { UserModule } from './modules/user/user.module';
 import { ApplicationModule } from './modules/application/application.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { JwtModule } from './modules/jwt/jwt.module';
+import { validate } from './config/env.validation';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      validate,
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
@@ -19,6 +22,7 @@ import { AuthModule } from './modules/auth/auth.module';
     UserModule,
     ApplicationModule,
     AuthModule,
+    JwtModule,
   ],
   controllers: [],
   providers: [],

@@ -1,15 +1,18 @@
 import { config } from 'dotenv';
+import { validate } from 'src/config/env.validation';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
 config({ path: '.env' });
 
+const envVariables = validate(process.env);
+
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
-  host: process.env.DATABASE_HOST,
-  port: parseInt(process.env.DATABASE_PORT, 10) || 5432,
-  username: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE_NAME,
+  host: envVariables.DATABASE_HOST,
+  port: envVariables.DATABASE_PORT,
+  username: envVariables.DATABASE_USER,
+  password: envVariables.DATABASE_PASSWORD,
+  database: envVariables.DATABASE_NAME,
   entities: ['src/db/entities/*.entity.ts'],
   migrations: ['src/db/migrations/*.ts'],
   synchronize: false,

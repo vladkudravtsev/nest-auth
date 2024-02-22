@@ -5,9 +5,11 @@ import {
   RegisterRequest,
   RegisterResponse,
 } from '../../api/proto/auth_pb';
+import { Expose } from 'class-transformer';
 
 export class LoginRequestDTO implements LoginRequest.AsObject {
-  @IsNumber()
+  @IsNumber({}, { message: 'app_id must be a number' })
+  @Expose({ name: 'app_id' })
   appId: number;
 
   @IsString()

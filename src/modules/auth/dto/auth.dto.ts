@@ -1,15 +1,8 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import {
-  LoginRequest,
-  LoginResponse,
-  RegisterRequest,
-  RegisterResponse,
-} from '../../api/proto/auth_pb';
 import { Expose } from 'class-transformer';
 
-export class LoginRequestDTO implements LoginRequest.AsObject {
+export class LoginRequestDTO {
   @IsNumber({}, { message: 'app_id must be a number' })
-  @Expose({ name: 'app_id' })
   appId: number;
 
   @IsString()
@@ -21,7 +14,12 @@ export class LoginRequestDTO implements LoginRequest.AsObject {
   password: string;
 }
 
-export class RegisterRequestDTO implements RegisterRequest.AsObject {
+export class HttpLoginRequestDTO extends LoginRequestDTO {
+  @Expose({ name: 'app_id' })
+  appId: number;
+}
+
+export class RegisterRequestDTO {
   @IsString()
   @IsNotEmpty()
   identity: string;
@@ -31,10 +29,10 @@ export class RegisterRequestDTO implements RegisterRequest.AsObject {
   password: string;
 }
 
-export class LoginResponseDTO implements LoginResponse.AsObject {
+export class LoginResponseDTO {
   token: string;
 }
 
-export class RegisterResponseDTO implements RegisterResponse.AsObject {
+export class RegisterResponseDTO {
   message: string;
 }

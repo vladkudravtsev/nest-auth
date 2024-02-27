@@ -3,7 +3,7 @@ import {
   RegisterResponseDTO,
   LoginRequestDTO,
   LoginResponseDTO,
-} from '../auth.dto';
+} from '../dto/auth.dto';
 
 export interface AuthController {
   register(data: RegisterRequestDTO): Promise<RegisterResponseDTO>;

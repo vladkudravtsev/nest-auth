@@ -4,7 +4,7 @@ import {
   RegisterResponseDTO,
   LoginRequestDTO,
   LoginResponseDTO,
-} from '../auth.dto';
+} from '../dto/auth.dto';
 import { AuthService } from '../auth.service';
 
 @Injectable()

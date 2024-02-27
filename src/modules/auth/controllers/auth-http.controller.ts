@@ -1,10 +1,10 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import {
-  LoginRequestDTO,
+  HttpLoginRequestDTO,
   LoginResponseDTO,
   RegisterRequestDTO,
   RegisterResponseDTO,
-} from '../auth.dto';
+} from '../dto/auth.dto';
 import { AuthController } from './controller.interface';
 import { BaseAuthController } from './auth.controller';
 
@@ -20,7 +20,7 @@ export class AuthHttpController implements AuthController {
   }
 
   @Post('login')
-  async login(@Body() data: LoginRequestDTO): Promise<LoginResponseDTO> {
+  async login(@Body() data: HttpLoginRequestDTO): Promise<LoginResponseDTO> {
     return this.baseController.login(data);
   }
 }

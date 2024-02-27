@@ -11,7 +11,7 @@ import {
   AppNotFoundException,
   UserAlreadyExistsException,
   DomainException,
-} from 'src/domain/exceptions/auth.exception';
+} from '../../domain/exceptions/auth.exception';
 
 const httpCodeMapping = new Map([
   [InvalidCredentialsException.name, HttpStatus.BAD_REQUEST],

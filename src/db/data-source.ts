@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
-import { validate } from 'src/config/env.validation';
 import { DataSource, DataSourceOptions } from 'typeorm';
+import { validate } from '../config/env.validation';
 
 config({ path: '.env' });
 

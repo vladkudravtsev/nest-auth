@@ -1,13 +1,14 @@
 import { Catch, ExceptionFilter } from '@nestjs/common';
 import { Observable, throwError } from 'rxjs';
-import {
-  AppNotFoundException,
-  DomainException,
-  InvalidCredentialsException,
-  UserAlreadyExistsException,
-  UserNotFoundException,
-} from 'src/domain/exceptions/auth.exception';
+
 import { status } from '@grpc/grpc-js';
+import {
+  InvalidCredentialsException,
+  UserNotFoundException,
+  AppNotFoundException,
+  UserAlreadyExistsException,
+  DomainException,
+} from '../../domain/exceptions/auth.exception';
 
 const rpcCodeMapping = new Map([
   [InvalidCredentialsException.name, status.INVALID_ARGUMENT],

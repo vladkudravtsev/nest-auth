@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { App } from 'src/domain/app';
 import { DataSource } from 'typeorm';
 import { ApplicationEntity } from './application.entity';
 import { ApplicationMapper } from './application.mapper';
 import { Repository } from './repository.interface';
+import { App } from '../../domain/app';
 
 @Injectable()
 export class ApplicationRepository implements Repository {

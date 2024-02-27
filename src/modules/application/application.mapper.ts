@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ApplicationEntity } from './application.entity';
-import { App } from 'src/domain/app';
+import { App } from '../../domain/app';
 
 @Injectable()
 export class ApplicationMapper {

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { App } from 'src/domain/app';
+import { App } from '../../domain/app';
 
 @Injectable()
 export abstract class Repository {

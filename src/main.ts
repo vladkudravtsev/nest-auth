@@ -18,11 +18,14 @@ async function bootstrap() {
   app.useGlobalPipes(validationPipe);
   app.useGlobalFilters(new HttpDomainExceptionFilter());
 
+  const grpcHost = configService.getOrThrow<string>('GRPC_HOST');
+  const grpcPort = configService.getOrThrow<number>('GRPC_PORT');
+
   const microservice =
     await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
       transport: Transport.GRPC,
       options: {
-        url: configService.getOrThrow<string>('GRPC_URL'),
+        url: `${grpcHost}:${grpcPort}`,
         package: 'auth',
         protoPath: 'node_modules/nest-proto/auth.proto',
       },

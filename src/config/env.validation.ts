@@ -29,8 +29,11 @@ class EnvironmentVariables {
   @IsNumber()
   HTTP_PORT: number;
 
+  @IsNumber()
+  GRPC_PORT: number;
+
   @IsString()
-  GRPC_URL: string;
+  GRPC_HOST: string;
 }
 
 export function validate(config: Record<string, unknown>) {

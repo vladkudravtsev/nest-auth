@@ -1,0 +1,32 @@
+services:
+  auth:
+    build: .
+    ports:
+      - '${HTTP_PORT}:${HTTP_PORT}'
+      - '${GRPC_PORT}:${GRPC_PORT}'
+    environment:
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - APP_SECRET=${APP_SECRET}
+      - JWT_LIFETIME=${JWT_LIFETIME}
+      - JWT_ISSUER=${JWT_ISSUER}
+      - HTTP_PORT=${HTTP_PORT}
+      - GRPC_HOST=${GRPC_HOST}
+      - GRPC_PORT=${GRPC_PORT}
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - '${DATABASE_PORT}:${DATABASE_PORT}'
+    volumes:
+      - nest-auth:/var/lib/postgresql/data
+
+volumes:
+  nest-auth:
